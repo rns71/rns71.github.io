@@ -1,40 +1,6 @@
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // 폼 제출 기본 동작 막기
-  
-    // 로딩 바 표시
-    document.getElementById('loading-bar').style.display = 'block';
-  
-    // 폼 데이터 수집
-    const formData = new FormData(this);
-  
-    // 예시로 콘솔에 폼 데이터를 출력
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-  
-    // 실제로 서버에 데이터를 보내려면 아래 주석을 해제하고 서버 URL을 설정
-    // fetch('/submit-form', {
-    //   method: 'POST',
-    //   body: formData
-    // }).then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     setTimeout(() => {
-    //       document.getElementById('loading-bar').style.display = 'none';
-    //       document.getElementById('success-message').style.display = 'block';
-    //     }, 500);
-    //   }).catch(error => {
-    //     console.error('Error:', error);
-    //     alert('There was an error submitting the form');
-    //   });
-  
-    // 성공 메시지 표시 (서버 요청이 없는 경우, 이 코드를 유지하세요)
-    setTimeout(() => {
-      document.getElementById('loading-bar').style.display = 'none';
-      document.getElementById('success-message').style.display = 'block';
-    }, 500);
-  });
-  
+
+
+
   const scrollContainer = document.getElementById('scroll-container');
 
   window.addEventListener('scroll', () => {
@@ -54,3 +20,57 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     // 선택된 컨텐츠 보여주기
     document.getElementById(contentId).classList.add('active-content');
 }
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.submit').addEventListener('click', sendMessage);
+});
+
+  // 폼 제출 이벤트 리스너
+  function sendMessage() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+  
+    if (name && email && message) {
+      // Firebase에 데이터 저장
+      firebase.database().ref('messages').push({
+        name: name,
+        email: email,
+        message: message,
+        timestamp: Date.now()
+      }).then(() => {
+        document.getElementById('success-message').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('success-message').style.display = 'none';
+        }, 3000);
+        // 확인 메시지 표시
+        alert("메시지가 전송되었습니다!");
+        // 폼 초기화
+        document.getElementById('contact-form').reset();
+      }).catch((error) => {
+        console.error('Error writing new message to Firebase Database', error);
+      });
+    }
+  }
+
+  // Firebase 데이터베이스 실시간 업데이트 리스너
+  firebase.database().ref('messages').on('child_added', function(snapshot) {
+    const message = snapshot.val();
+    displayMessage(message.name, message.email, message.message);
+  });
+
+  // 메시지 표시 함수
+  function displayMessage(name, email, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message');
+    messageDiv.innerHTML = `<strong>${name}</strong> (${email}): <p>${message}</p>`;
+    document.getElementById('messages').appendChild(messageDiv);
+  }

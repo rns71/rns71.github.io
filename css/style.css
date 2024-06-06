@@ -215,19 +215,6 @@
   background: #004494;
 }
 
-#success-message {
-  display: none;
-  color: green;
-  margin-top: 15px;
-}
-
-#loading-bar {
-  display: none;
-  color: blue;
-  margin-top: 15px;
-}
-
-
 
 
 #scroll-container {
@@ -299,4 +286,10 @@ body, html {
   border: 2px solid#dadbf1;
   border-radius: 10px;
   background-color: #dadbf1;
+}
+
+.message {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
