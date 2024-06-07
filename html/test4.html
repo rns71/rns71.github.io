@@ -4,14 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    
+        #signUpForm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+    
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        #signUpButton {
+            background-color: #1eabdd;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+    
+        #signUpButton:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <form>
-        <div>email: <input type="email"/></div>
-        <div>passward: <input type="password"/></div>
-        <button type="submit">회원가입</button>
-        <button>로그인하기</button>
-    </form>
+    <div id="signUpForm">
+        <input type="text" id="uidInput" placeholder="학번">
+        <input type="text" id="usernameInput" placeholder="이름">
+        <textarea name="message" id="bodyInput" rows="5" placeholder="Message"></textarea>
+        <button id="signUpButton">Sign Up</button>
+    </div>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -28,14 +73,49 @@
           storageBucket: "websiterns-9d239.appspot.com",
           messagingSenderId: "869882195310",
           appId: "1:869882195310:web:9b410b7bc5c2305e93257f",
-          measurementId: "G-585N2FRTDD"
+          measurementId: "G-585N2FRTDD",
+          databaseURL: "https://websiterns-9d239-default-rtdb.firebaseio.com/"
         };
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-        console.log("hh")
-        console.log(app)
+        const database = getDatabase(app);
+        
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+        import { getDatabase, ref, child, push, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        function writeNewPost(uid, username, body) {
+            const db = getDatabase();
+
+            // A post entry.
+            const postData = {
+                author: username,
+                uid: uid,
+                body: body,
+            };
+
+            // Get a key for a new Post.
+            const newPostKey = push(child(ref(db), 'posts')).key;
+
+            // Write the new post's data simultaneously in the posts list and the user's post list.
+            const updates = {};
+            updates['/posts/' + newPostKey] = postData;
+            // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+            return update(ref(db), updates);
+        }
+        document.getElementById('signUpButton').addEventListener('click', () => {
+            const uid = document.getElementById('uidInput').value;
+            const username = document.getElementById('usernameInput').value;
+            const body = document.getElementById('bodyInput').value;
+
+            writeNewPost(uid, username, body);
+            alert('전송완료')
+        });
     </script>
 </body>
 </html>
