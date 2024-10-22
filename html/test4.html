@@ -133,9 +133,14 @@
         }
 
         document.getElementById('signUpButton').addEventListener('click', () => {
-            const uid = document.getElementById('uidInput').value;
-            const username = document.getElementById('usernameInput').value;
-            const body = document.getElementById('bodyInput').value;
+            const uid = document.getElementById('uidInput').value.trim();
+            const username = document.getElementById('usernameInput').value.trim();
+            const body = document.getElementById('bodyInput').value.trim();
+
+            if (!uid || !username || !body) {
+                alert('학번, 이름, 메시지를 모두 입력하세요.');
+                return; // 함수 종료
+            }
 
             writeNewPost(uid, username, body);
             alert('전송완료');

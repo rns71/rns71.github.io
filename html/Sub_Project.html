@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="블루프린트를 사용한 기능과 애니메이션 제작">
+  <meta name="author" content="YejunCompany">
+  <title>ark survival : ascended - The New Creature Mod </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .slides {
+      display: none;
+      text-align: center;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .text {
+      color: black;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev {
+      left: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,1);
+    }
+
+    .slideshow-container article {
+      transition: transform 0.3s ease;
+    }
+
+    .slideshow-container article:hover {
+      transform: scale(1.05);
+    }
+
+    .dot-container {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .dot.active {
+      background-color: #717171;
+    }
+  </style>
+</head>
+<body>
+<header class="bg-dark text-white text-center py-3">
+  <div class="container">
+    <h1 class="display-4">ark survival : ascended - The New Creature Mod</h1>
+    <p class="lead">언리얼 엔진5와 Dev Kit을 이용한 게임 모드 제작</p>
+  </div>
+</header>
+
+<main class="container my-5">
+  <section class="mb-5">
+    <h2 class="text-center">모드 소개</h2>
+    <p class="lead text-center">"ark survival : ascended - The New Creature Mod" 는 더 많은 공룡과 생명체를 추가해주는 모드입니다.</p>
+    <div class="row">
+      <div class="col-lg-6">
+        <img src="../image/asa.jpg" class="img-fluid rounded" alt="블루프린트 예제">
+      </div>
+      <div class="col-lg-6">
+        <h3>개발 목적</h3>
+        <ul>
+          <li style="list-style-type: none; padding: 0;">
+            <h5>
+              ark survival: ascended의 생물 추가 모드로 아래의 생물을 추가한다.<br>
+              Common raven(큰까마귀)<br>
+              Tyrannotitan(티란노티탄)<br>
+              undersea traveler(해저여행자)<br>
+              추가 엔그램 및 아이템
+            </h5>
+          </li>
+        </ul>
+        <h3>왜 만드나요?</h3>
+        <ul>
+          <li>대형 게임의 소스코드를 다뤄보며 더 좋은 퀄리티로 제작하기 위해</li>
+          <li>Old boxer Tyrano(OBT)의 개발 자금 확보</li>
+          <li>YeJunCompany를 홍보하기 위해</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="text-center">설정 및 초기 기획안</h2>
+    <p class="lead text-center">다양생물들의 초기 기획안을 만나보세요.</p>
+    <div class="slideshow-container">
+      <article class="slides active">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="../image/raven_model.jpg" class="img-fluid rounded" alt="애니메이션 예제">
+          </div>
+          <div class="col-lg-6">
+            <div class="text">
+              <h3>Common raven</h3>
+              <ul>
+                <li>기가노토, 카르카로돈토와 스폰테이블을 공유하나, 15%의 확률로 스폰된다.</li>
+                <li>플랫폼 안장을 장착 할 수 있다.</li>
+                <li>평화 테이밍이며, 테이밍을 위해 까마귀의 전리품으로 만드는 "특별한 아이템"이 필요하다.</li>
+                <li>"특별한 아이템"에는 까마귀의 깃털이 들어가며, 전용 아이템과 건축물에 사용된다.</li>
+              </ul>
+              <h3>능력</h3>
+              <ul>
+                <li>탑승자에게 더위 및 추위 저항 200 추가</li>
+                <li>플랫폼 안장으로 최대 100개의 구조물 건축 가능</li>
+                <li>우클릭시 큰 날개로 머리를 감싸며(눈올빼미와 같은 모델링) 간이 집을 만든다. 내부에는 더위 및 추위, 폭염과 같은 기후에 면역이 되며 "안락함" 버프를 제공한다.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="slides">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="../image/Tyrannotitan.jpg" class="img-fluid rounded" alt="갤러리 이미지 1">
+          </div>
+          <div class="col-lg-6">
+            <div class="text">
+              <h3>Tyrannotitan</h3>
+              <ul>
+                <li>가장 큰 대형 수각류</li>
+                <li>카르카로돈토, 기가노토, 큰까마귀와 스폰 테이블을 공유한다.</li>
+                <li>기절 테이밍이지만 500% 이하의 장비로는 기절 시킬 수 없다.</li>
+                <li>테이밍 먹이로는 알로사우루스의 뇌, 유티라누스의 폐, 기가노토의 심장만 먹으며 오른 쪽으로 갈 수록 효율이 높다.</li>
+                <h3>능력</h3>
+                <li>컨트롤 키로 멋진 포효를 하며 렉스 미만의 생물들은 모두 넉백 및 스턴에 걸린다.</li>
+                <li>C키는 육중한 꼬리로 땅바닥을 내리친다.</li>
+                <li>우클릭은 체력이 소형 생물 및 체력이 3%이하의 적을 즉사 시킨다.(쿨타임 3분)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="slides">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="../image/undersea_traveler.jpg" class="img-fluid rounded" alt="갤러리 이미지 2">
+          </div>
+          <div class="col-lg-6">
+            <div class="text">
+              <h3>undersea walker</h3>
+              <ul>
+                <li>심해에서의 빠른 이동을 위한 생물</li>
+                <li>등에 탈 수 있으며 산소가 부족할 때 잠수 중 산소를 보충할 수 있다.</li>
+                <li>물속에서 시야 확보를 위한 빛을 발산할 수 있다.</li>
+              </ul>
+              <h3>능력</h3>
+              <ul>
+                <li>물속에서 이동 속도 50% 증가</li>
+                <li>잠수시 탑승자에게 산소 제공</li>
+                <li>물속에서 Space Bar누를 시 배에서 산소를 뿜으며 수면으로 상승함</li>
+                <li>우클릭시 측면에서 빛이 남</li>
+                <li>Ctrl키 누를 시 부스트</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </section>
+
+  <section class="text-center">
+    <h2>갤러리</h2>
+    <p class="lead">블루프린트를 사용한 다양한 프로젝트 예제를 확인하세요.</p>
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <img src="../image/T_bp1.png" class="img-fluid rounded" alt="갤러리 이미지 1">
+      </div>
+      <div class="col-lg-4 mb-4">
+        <img src="../image/T_bp2.png" class="img-fluid rounded" alt="갤러리 이미지 2">
+      </div>
+      <div class="col-lg-4 mb-4">
+        <img src="../image/T_bp3.png" class="img-fluid rounded" alt="갤러리 이미지 3">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-dark text-white text-center py-3">
+  <div class="container">
+    <p>&copy; 2024 YejunCompany. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    const slides = document.getElementsByClassName("slides");
+    const dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.remove("active");
+    }
+    slides[slideIndex - 1].classList.add("active");
+    dots[slideIndex - 1].classList.add("active");
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
