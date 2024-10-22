@@ -138,7 +138,7 @@
 
 
 
- 
+
 .special-form {
   background: #ffffff;
   padding: 20px;
@@ -246,7 +246,14 @@ body, html {
   background: url('../image/background1.png') no-repeat center center;
   background-size: cover;
 }
-
+.concorn22 {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 비율, 필요에 따라 조정 가능 */
+  background: url('../image/asa (2).jpg') no-repeat center center;
+  background-size: cover;
+}
 .tntxt {
   position: absolute;
   top: 50%;
@@ -257,6 +264,8 @@ body, html {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+
+
 .tntxt .large {
   font-size: 2em;
   font-weight: bold;
@@ -266,6 +275,28 @@ body, html {
   font-size: 1.5em;
   font-weight: bold;
 }
+
+
+.tntxt2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tntxt2 .large2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.tntxt2 .small2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .content {
   display: none;
   font-size: 1.3em;
