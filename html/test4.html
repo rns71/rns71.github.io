@@ -103,15 +103,14 @@
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
         import { getDatabase, ref, child, push, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC0arGvXJbhn-43gcN-pTx6hx0j7pv4xo",
-            authDomain: "rnsqmffkqmffk.firebaseapp.com",
-            databaseURL: "https://rnsqmffkqmffk-default-rtdb.firebaseio.com",
-            projectId: "rnsqmffkqmffk",
-            storageBucket: "rnsqmffkqmffk.appspot.com",
-            messagingSenderId: "384971692445",
-            appId: "1:384971692445:web:aab4af10d05fbcf1beb774",
-            measurementId: "G-SX3Z0ZHZ9J"
+        const firebaseConfig = {  //연결되어있는 주소의 파이어베이스DB에서 각 키에 해당하는 값들을 받아와 공유되는 html 홈페이지로 공유한다
+            apiKey: "AIzaSyBrXYHD6amg5RRh6kzHqUV4fpacvrhl_2w",
+            authDomain: "asdasd-9b6e9.firebaseapp.com",
+            projectId: "asdasd-9b6e9",
+            storageBucket: "asdasd-9b6e9.firebasestorage.app",
+            messagingSenderId: "182273022137",
+            appId: "1:182273022137:web:76ef9fcb8e1361bf5b2368",
+            measurementId: "G-BND3FE5EG6"
         };
       
         const app = initializeApp(firebaseConfig);
@@ -131,7 +130,7 @@
 
             return update(ref(database), updates);
         }
-
+                //대응되는 정보에 따라서 매칭되는 학번, 이름, 메시지 등의 정보를 DB와 연동해서 입력하고 받아온다
         document.getElementById('signUpButton').addEventListener('click', () => {
             const uid = document.getElementById('uidInput').value.trim();
             const username = document.getElementById('usernameInput').value.trim();
@@ -139,7 +138,7 @@
 
             if (!uid || !username || !body) {
                 alert('학번, 이름, 메시지를 모두 입력하세요.');
-                return; // 함수 종료
+                return; 
             }
 
             writeNewPost(uid, username, body);
